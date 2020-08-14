@@ -1,0 +1,4 @@
+com\sunfra\verticals\productivetool\util\HibernateUtil.class
+com\sunfra\verticals\productivetool\controller\EmployeeController.class
+com\sunfra\verticals\productivetool\entity\Client.class
+com\sunfra\verticals\productivetool\entity\Employee.class
