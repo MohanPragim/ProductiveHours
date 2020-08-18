@@ -40,7 +40,7 @@ public class EmployeeController {
 			response = "Employee entered invalid credentials";
 		}
 		model.addAttribute("response", response);
-		return "Response";
+		return "response";
 
 	}
 }
