@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ This material is the confidential, unpublished property
+  ~ of Fair Isaac Corporation.  Receipt or possession
+  ~ of this material does not convey rights to divulge,
+  ~ reproduce, use, or allow others to use it without
+  ~ the specific written authorization of Fair Isaac
+  ~ Corporation and use must conform strictly to the
+  ~ license agreement.
+  ~
+  ~ Copyright (c) Fair Isaac Corporation, 2020
+  ~ All Rights Reserved.
+  -->
+
+<configuration>
+
+    <appender name = "CONSOLE-APPENDER" class = "ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                %date{yyyy-MM-dd HH:mm:ss.SSS} ${hostName} [%thread] %-5level %logger{5}: %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name = "CUSTOM-APPENDER" class = "ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                %date{yyyy-MM-dd HH:mm:ss.SSS} ${hostName} [%thread] %-5level productve-tools %logger{5}: %msg %n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <root level = "INFO">
+        <appender-ref ref = "CONSOLE-APPENDER"/>
+    </root>
+
+    <logger name = "com.sunfra.verticals.productivetool" level = "INFO" additivity = "false">
+        <appender-ref ref = "CUSTOM-APPENDER"/>
+    </logger>
+
+</configuration>
