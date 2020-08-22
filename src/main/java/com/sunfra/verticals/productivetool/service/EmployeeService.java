@@ -4,5 +4,6 @@ import com.sunfra.verticals.productivetool.entity.Employee;
 
 public interface EmployeeService {
 
-	public abstract Employee getEmployee(int id);
+	Employee getEmployee(int id);
+
 }

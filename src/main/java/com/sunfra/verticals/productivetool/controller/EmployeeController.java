@@ -1,8 +1,8 @@
 package com.sunfra.verticals.productivetool.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,30 +13,34 @@ import com.sunfra.verticals.productivetool.service.EmployeeService;
 @Controller
 public class EmployeeController {
 
-	@Autowired
-	EmployeeService service;
-	
-	@RequestMapping("/login")
-	public String loginPage() {
+	private final EmployeeService employeeService;
 
-		return "Login";
+	public EmployeeController(final EmployeeService employeeService) {
+		this.employeeService = employeeService;
 	}
 
-	@RequestMapping(value = "/EmployeeLoginPage",method = RequestMethod.POST)
-	public String getLoginPage(@ModelAttribute("employee") Employee emp, ModelMap model) {
+	@GetMapping("/")
+	public String indexPage() {
+		return "index";
+	}
 
-		System.out.println(emp.getEmail()+" "+emp.getPassword());
+	@RequestMapping("/login")
+	public String loginPage() {
+		return "login";
+	}
+
+	@RequestMapping(value = "/validate-user",method = RequestMethod.POST)
+	public String getLoginPage(@ModelAttribute("employee") Employee inputEmployee, ModelMap model) {
 		String response;
-		System.out.println("----------------------------------");
-		Employee employee = service.getEmployee(401);
-		System.out.println(employee);
-		if(employee.getEmail().equalsIgnoreCase(emp.getEmail()) && employee.getPassword().equalsIgnoreCase(emp.getPassword())) {
-			response = "Employee Logged in succesfully";
+		Employee employee = employeeService.getEmployee(401);
+		if(employee.getEmail().equalsIgnoreCase(inputEmployee.getEmail())
+				&& employee.getPassword().equalsIgnoreCase(inputEmployee.getPassword())) {
+			response = "Employee Logged in successfully";
 		} else {
-			response = "Employee enter invalid creadentials";
+			response = "Employee entered invalid credentials";
 		}
 		model.addAttribute("response", response);
-		return "Response";
-		
+		return "response";
+
 	}
 }
